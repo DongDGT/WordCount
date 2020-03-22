@@ -10,11 +10,10 @@ int main(int argc, char* argv[]){
     for (int i = 1; i < argc; i++)
     {
         controlor.AddMessage(argv[i]);
-    }
+    } /*123*/
+    int test/*½ö²âÊÔÓÃ*/;
     controlor.Distribution();
     controlor.Control();
-    system("pause");
     return 0;
 }
-//wanjibane
-/*wxeuan*/
+

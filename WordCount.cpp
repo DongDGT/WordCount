@@ -149,47 +149,44 @@ void WordCount::OthersLinesCount()
     while(bInterator!=eof){
         char nowchar;
         nowchar=*bInterator;
-        if(((nowchar>='A'&&nowchar<='Z')||(nowchar>='a'&&nowchar<='z'))&&!isNote)
+        if (((nowchar >= 'A' && nowchar <= 'Z') || (nowchar >= 'a' && nowchar <= 'z')) && !isNote&&!isNoting)
+        {
             isDataLine=true;
+            isNoteEndReady = false;
+            isNoteReady = false;
+        }
         else if(nowchar=='/')
         {
             if(!isNoteReady)
                 isNoteReady=true;
-            else if(isNoteEndReady)
-            {
-                isNoting=false;
-                isNoteEndReady=false;
-            }
-            else if(!isDataLine)
+            else 
                 isNote=true;
+            if (isNoteEndReady)
+                isNoting = false;
+            isNoteEndReady=false;
         }
         else if(nowchar=='*')
         {
             if(isNoteReady)
-            {
                 isNoting=true;
-                isNote=true;
-            }
             else if(isNoting)
                 isNoteEndReady=true;
+            isNoteReady = false;
         }
         else if(nowchar=='\n')
         {
             if(isDataLine)
-            {
                 this->dataLinesCount++;
-                isDataLine=false;
-            }
             else if(isNote)
-            {
                 this->notesLinesCount++;
-                if(!isNoting)
-                isNote=false;
-            }
+            else if (isNoting)
+                this->notesLinesCount++;
             else
-            {
                 this->emptyLinesCount++;
-            }
+            isNote=false;
+            isDataLine=false;
+            isNoteEndReady = false;
+            isNoteReady = false;
         }
         bInterator++;
      }

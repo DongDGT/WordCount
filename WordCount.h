@@ -42,8 +42,4 @@ private:
     void OthersLinesCount();
 };
 
-
-
-
-
 #endif
